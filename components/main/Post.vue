@@ -26,7 +26,10 @@
 <script>
 export default {
   methods: {
-    openPost() {},
+    openPost() {
+      const id = 1;
+      this.$router.push(`/post/${id}`);
+    },
   },
 };
 </script>
