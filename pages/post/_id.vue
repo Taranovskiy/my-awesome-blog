@@ -45,10 +45,13 @@
       </p>
     </main>
     <footer>
-      <!-- Form -->
-
+      <app-comment-form v-if="canAddComment" @created="createCommentHandler" />
       <div v-if="true" class="comments">
-        <app-comment v-for="comment in 4" :key="comment" :comment="comment" />
+        <app-comment
+          v-for="comment in 4"
+          :key="comment"
+          :comment="String(comment)"
+        />
       </div>
       <div v-else class="text-center">Комментариев нет</div>
     </footer>
@@ -57,10 +60,22 @@
 
 <script>
 import AppComment from '@/components/main/Comment';
+import AppCommentForm from '@/components/main/CommentForm';
+
 export default {
-  components: { AppComment },
+  components: { AppComment, AppCommentForm },
   validate({ params }) {
     return Boolean(params.id);
+  },
+  data() {
+    return {
+      canAddComment: true,
+    };
+  },
+  methods: {
+    createCommentHandler() {
+      this.canAddComment = false;
+    },
   },
 };
 </script>
