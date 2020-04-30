@@ -3,12 +3,15 @@ export const state = () => ({
 });
 
 export const getters = {
-  isAuthanticated: (state) => Boolean(state.token),
+  isAuthenticated: (state) => Boolean(state.token),
 };
 
 export const mutations = {
   setToken(state, token) {
     state.token = token;
+  },
+  clearToken(state) {
+    state.token = null;
   },
 };
 
@@ -23,5 +26,8 @@ export const actions = {
   },
   setToken({ commit }, token) {
     commit('setToken', token);
+  },
+  logout({ commit }) {
+    commit('clearToken');
   },
 };
