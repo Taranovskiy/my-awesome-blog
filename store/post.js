@@ -1,5 +1,5 @@
 export const actions = {
-  async fetchAdmin() {
+  async fetchAdmin(ctx) {
     return await new Promise((resolve) => {
       setTimeout(() => {
         resolve([
@@ -21,4 +21,5 @@ export const actions = {
       }, 1000);
     });
   },
+  async remove(ctx, id) {},
 };
