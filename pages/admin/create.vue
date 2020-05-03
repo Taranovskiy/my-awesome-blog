@@ -12,12 +12,28 @@
 
     <el-form-item label="Текст в формате .md или .html" prop="text">
       <el-input
-        v-model.trim="controls.text"
+        v-model="controls.text"
         type="textarea"
         resize="none"
         :rows="10"
       />
     </el-form-item>
+
+    <el-button
+      class="mb"
+      size="small"
+      type="success"
+      plain
+      @click="previewDialog = true"
+    >
+      Предпросмотр
+    </el-button>
+
+    <el-dialog title="Предпросмотр" :visible.sync="previewDialog">
+      <div :key="controls.text">
+        <vue-markdown>{{ controls.text }}</vue-markdown>
+      </div>
+    </el-dialog>
 
     <el-form-item>
       <el-button type="primary" round native-type="submit" :loading="loading">
@@ -34,6 +50,7 @@ export default {
   data() {
     return {
       loading: false,
+      previewDialog: false,
       controls: {
         text: '',
         title: '',

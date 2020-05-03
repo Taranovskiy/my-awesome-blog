@@ -12,7 +12,7 @@
 
     <el-form-item label="Текст комментария" prop="text">
       <el-input
-        v-model.trim="controls.text"
+        v-model="controls.text"
         :rows="2"
         resize="none"
         type="textarea"

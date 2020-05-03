@@ -13,7 +13,7 @@
     >
       <el-form-item label="Текст в формате .md или .html" prop="text">
         <el-input
-          v-model.trim="controls.text"
+          v-model="controls.text"
           type="textarea"
           resize="none"
           :rows="10"
