@@ -23,12 +23,22 @@ export const actions = {
       }, 1000);
     });
   },
-  async create(ctx, { title, text }) {
-    return await new Promise((resolve) => {
-      setTimeout(() => {
-        resolve();
-      }, 1000);
-    });
+  async create({ commit }, { title, text, image }) {
+    try {
+      const fd = new FormData();
+      fd.append('title', title);
+      fd.append('text', text);
+      fd.append('image', image, image.name);
+
+      return await new Promise((resolve) => {
+        setTimeout(() => {
+          resolve();
+        }, 1000);
+      });
+    } catch (error) {
+      commit('setError', error, { root: true });
+      throw error;
+    }
   },
   async update(ctx, { id, text }) {},
   async remove(ctx, id) {},
