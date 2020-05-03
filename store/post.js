@@ -23,8 +23,15 @@ export const actions = {
       }, 1000);
     });
   },
-  async remove(ctx, id) {},
+  async create(ctx, { title, text }) {
+    return await new Promise((resolve) => {
+      setTimeout(() => {
+        resolve();
+      }, 1000);
+    });
+  },
   async update(ctx, { id, text }) {},
+  async remove(ctx, id) {},
   async fetchAdminById(ctx, id) {
     return await new Promise((resolve) => {
       setTimeout(() => {

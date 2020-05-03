@@ -5,7 +5,7 @@
     :rules="rules"
     @submit.prevent.native="onSubmit"
   >
-    <h2>Создать пользователя</h2>
+    <h1 class="mb">Создать пользователя</h1>
     <el-form-item label="Логин" prop="login">
       <el-input v-model.trim="controls.login" />
     </el-form-item>
