@@ -4,20 +4,20 @@ const keys = require('../keys');
 
 const User = model('users');
 
-cosnt options = {
+const options = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
   secretOrKey: keys.JWT,
 };
 
 module.exports = new Strategy(options, async (payload, done) => {
   try {
-    const cadidate = await User.findById(payload.userId).select('id');
+    const candidate = await User.findById(payload.userId).select('id');
     if (candidate) {
-      done(null, cadidate);
+      done(null, candidate);
     } else {
       done(null, false);
     }
   } catch (error) {
     console.error(error);
   }
-})
+});
