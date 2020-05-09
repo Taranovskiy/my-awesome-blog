@@ -8,7 +8,7 @@ export const getters = {
 
 export const mutations = {
   setError(state, error) {
-    state.error = error.message;
+    state.error = error;
   },
   clearError(state) {
     state.error = null;

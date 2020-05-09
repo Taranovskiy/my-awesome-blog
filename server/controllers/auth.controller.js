@@ -22,7 +22,7 @@ module.exports.login = async (req, res) => {
       );
       res.status(200).json({ token });
     } else {
-      res.status(404).json({ message: 'Пользователь не найден' });
+      res.status(401).json({ message: 'Неверный пароль' });
     }
   } else {
     res.status(404).json({ message: 'Пользователь не найден' });
@@ -31,6 +31,7 @@ module.exports.login = async (req, res) => {
 
 module.exports.createUser = async (req, res) => {
   const candidate = await User.findOne({ login: req.body.login });
+  console.log('candidate -->', candidate);
   if (candidate) {
     res
       .status(409)
