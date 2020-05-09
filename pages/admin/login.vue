@@ -68,11 +68,15 @@ export default {
 
     switch (message) {
       case 'login':
-        this.$message.info('Для начала войдите в систему');
+        this.$message.info('Для начала войдите в систему.');
         break;
 
       case 'logout':
-        this.$message.success('Вы успешно вышли из системы');
+        this.$message.success('Вы успешно вышли из системы.');
+        break;
+
+      case 'session':
+        this.$message.warning('Время сессии истекло. Войдите заново.');
         break;
 
       default:
