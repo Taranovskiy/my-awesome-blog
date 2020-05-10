@@ -8,8 +8,5 @@ export default function(token) {
   const jwtData = jwtDecode(token) || {};
   const expires = jwtData.exp || 0;
 
-  // eslint-disable-next-line no-console
-  console.log('jwtData -->', jwtData);
-
   return new Date().getTime() / 1000 < expires;
 }
