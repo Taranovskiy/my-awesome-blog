@@ -25,12 +25,16 @@
       <vue-markdown>{{ post.text }}</vue-markdown>
     </main>
     <footer>
-      <app-comment-form v-if="canAddComment" @created="createCommentHandler" />
+      <app-comment-form
+        v-if="canAddComment"
+        :post-id="post._id"
+        @created="createCommentHandler"
+      />
       <div v-if="post.comments.length" class="comments">
         <app-comment
-          v-for="comment in 4"
-          :key="comment"
-          :comment="String(comment)"
+          v-for="comment in post.comments"
+          :key="comment._id"
+          :comment="comment"
         />
       </div>
       <div v-else class="text-center">Комментариев нет</div>
@@ -60,7 +64,8 @@ export default {
     };
   },
   methods: {
-    createCommentHandler() {
+    createCommentHandler(comment) {
+      this.post.comments.unshift(comment);
       this.canAddComment = false;
     },
   },
