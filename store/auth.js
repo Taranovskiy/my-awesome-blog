@@ -1,3 +1,7 @@
+import Cookie from 'cookie';
+import Cookies from 'js-cookie';
+import isJwtValid from '../helpers/isJwtValid';
+
 export const state = () => ({
   token: null,
 });
@@ -29,6 +33,18 @@ export const actions = {
       throw error;
     }
   },
+  autoLogin({ dispatch }) {
+    const cookieStr = process.browser
+      ? document.cookie
+      : this.app.context.req.headers.cookie;
+    const cookies = Cookie.parse(cookieStr || '') || {};
+    const token = cookies['jwt-token'];
+    if (isJwtValid(token)) {
+      dispatch('setToken', token);
+    } else {
+      dispatch('logout');
+    }
+  },
   async createUser({ commit }, formData) {
     try {
       await this.$axios.$post('/api/auth/admin/create', formData);
@@ -40,9 +56,11 @@ export const actions = {
   setToken({ commit }, token) {
     this.$axios.setToken(token, 'Bearer');
     commit('setToken', token);
+    Cookies.set('jwt-token', token);
   },
   logout({ commit }) {
     this.$axios.setToken(false);
     commit('clearToken');
+    Cookies.remove('jwt-token');
   },
 };

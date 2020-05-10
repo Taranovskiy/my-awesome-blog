@@ -70,6 +70,7 @@ export default {
             setTimeout(() => {
               this.$message.success('Комментарий добавлен');
               this.$emit('created');
+              // eslint-disable-next-line no-console
               console.log('formData -->', formData);
             }, 2000);
           } catch (error) {

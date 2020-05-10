@@ -64,7 +64,6 @@ export default {
           type: 'warning',
         });
         await this.$store.dispatch('post/remove', id);
-        console.log('this.posts -->', this.posts);
         this.$message.success('Пост удалён');
       } catch (error) {}
     },
