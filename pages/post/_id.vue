@@ -2,7 +2,7 @@
   <article class="post">
     <header class="post-header">
       <div class="post-title">
-        <h1>Post title</h1>
+        <h1>{{ post.title }}</h1>
         <nuxt-link to="/">
           <i class="el-icon-back"></i>
         </nuxt-link>
@@ -10,43 +10,23 @@
       <div class="post-info">
         <small>
           <i class="el-icon-time"></i>
-          {{ new Date().toLocaleString() }}
+          {{ new Date(post.date).toLocaleString() }}
         </small>
         <small>
           <i class="el-icon-view"></i>
-          42
+          {{ post.views }}
         </small>
       </div>
       <div class="post-image">
-        <img
-          src="https://media.globalchampionstour.com/cache/750x429/assets/berlin.jpg"
-          alt="post-image"
-        />
+        <img :src="post.imageUrl" alt="post-image" />
       </div>
     </header>
     <main class="post-content">
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam maxime,
-        alias consequatur asperiores molestiae quia ipsam, tempora sequi
-        repudiandae eveniet nihil cum nam, inventore fuga fugiat? Iure
-        dignissimos eius aspernatur?
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam maxime,
-        alias consequatur asperiores molestiae quia ipsam, tempora sequi
-        repudiandae eveniet nihil cum nam, inventore fuga fugiat? Iure
-        dignissimos eius aspernatur?
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam maxime,
-        alias consequatur asperiores molestiae quia ipsam, tempora sequi
-        repudiandae eveniet nihil cum nam, inventore fuga fugiat? Iure
-        dignissimos eius aspernatur?
-      </p>
+      <vue-markdown>{{ post.text }}</vue-markdown>
     </main>
     <footer>
       <app-comment-form v-if="canAddComment" @created="createCommentHandler" />
-      <div v-if="true" class="comments">
+      <div v-if="post.comments.length" class="comments">
         <app-comment
           v-for="comment in 4"
           :key="comment"
@@ -66,6 +46,13 @@ export default {
   components: { AppComment, AppCommentForm },
   validate({ params }) {
     return Boolean(params.id);
+  },
+  async asyncData({ store, params }) {
+    const post = await store.dispatch('post/fetchById', params.id);
+    await store.dispatch('post/addView', post);
+    return {
+      post: { ...post, views: ++post.views },
+    };
   },
   data() {
     return {

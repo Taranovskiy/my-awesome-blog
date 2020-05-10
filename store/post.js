@@ -10,6 +10,14 @@ export const actions = {
       throw error;
     }
   },
+  async fetch({ commit }) {
+    try {
+      return await this.$axios.$get('/api/post');
+    } catch (error) {
+      commit('setError', error, { root: true });
+      throw error;
+    }
+  },
   async create({ commit }, { title, text, image }) {
     try {
       const fd = new FormData();
@@ -42,6 +50,22 @@ export const actions = {
   async fetchAdminById({ commit }, id) {
     try {
       return await this.$axios.$get(`/api/post/admin/${id}`);
+    } catch (error) {
+      commit('setError', error, { root: true });
+      throw error;
+    }
+  },
+  async fetchById({ commit }, id) {
+    try {
+      return await this.$axios.$get(`/api/post/${id}`);
+    } catch (error) {
+      commit('setError', error, { root: true });
+      throw error;
+    }
+  },
+  async addView({ commit }, { _id, views }) {
+    try {
+      return await this.$axios.$put(`/api/post/add/view/${_id}`, { views });
     } catch (error) {
       commit('setError', error, { root: true });
       throw error;
