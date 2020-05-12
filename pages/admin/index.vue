@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Аналитика по постам</h1>
-    <canvas ref="canvas"></canvas>
+    <canvas ref="canvas" height="50vh"></canvas>
   </div>
 </template>
 
@@ -12,7 +12,12 @@ export default {
   layout: 'admin',
   middleware: ['adminAuth'],
   extends: Bar,
+  async asyncData({ store }) {
+    const analytics = await store.dispatch('post/getAnalytics');
+    return { analytics };
+  },
   mounted() {
+    console.log('this.analytics -->', this.analytics);
     const data = {
       labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
       datasets: [
