@@ -49,6 +49,9 @@ module.exports = {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {},
+  env: {
+    appName: 'Awesome blog',
+  },
   /*
    ** Build configuration
    */

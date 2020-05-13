@@ -69,6 +69,11 @@ export default {
       this.canAddComment = false;
     },
   },
+  head() {
+    return {
+      title: `${this.post.title} | ${process.env.appName}`,
+    };
+  },
 };
 </script>
 
