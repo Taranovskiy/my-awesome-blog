@@ -24,7 +24,7 @@
         <small>
           <i class="el-icon-time"></i>
           <span style="margin-right: 10px">
-            {{ new Date(post.date).toLocaleString() }}
+            {{ post.date | date }}
           </span>
           <i class="el-icon-view"></i>
           <span>{{ post.views }}</span>

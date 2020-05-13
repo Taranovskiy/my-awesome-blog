@@ -4,9 +4,7 @@
     <el-table-column label="Дата" width="200">
       <template slot-scope="{ row: { date } }">
         <i class="el-icon-time"></i>
-        <span style="margin-left: 10px">{{
-          new Date(date).toLocaleString()
-        }}</span>
+        <span style="margin-left: 10px">{{ date | date('date') }}</span>
       </template>
     </el-table-column>
     <el-table-column label="Просмотры" width="180">
