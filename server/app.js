@@ -11,7 +11,7 @@ const keys = require('./keys');
 const app = express();
 
 mongoose
-  .connect(keys.MONGO_URI)
+  .connect(keys.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   // eslint-disable-next-line no-console
   .then(() => console.log('--->>', 'MongoDB connected...'))
   // eslint-disable-next-line no-console
